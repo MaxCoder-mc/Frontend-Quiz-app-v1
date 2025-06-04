@@ -1,0 +1,634 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+:root {
+  /* Colors */
+  --White: #ffffff;
+  --Black: #000000;
+  --Grey500: #626c7f;
+  --Grey50: #f4f6fa;
+  --Blue950: #2d3949;
+  --Blue900: #313e51;
+  --Blue850: #3b4d66;
+  --Blue500: #306aff;
+  --Blue300: #abc1e1;
+  --Blue100: #edf1f9;
+  --Blue50: #ebf0ff;
+  --Green500: #2fd887;
+  --Green100: #e0fdef;
+  --Purple600: #a729f5;
+  --Purple100: #f6e7ff;
+  --Orange400: #ff7e35;
+  --Orange50: #fff5ed;
+  --Red500: #ee5454;
+
+  /* Typography */
+  --fontFamily: "Rubik", sans-serif;
+
+  --TextPreset-1: 500 88px/1 var(--fontFamily);
+  --TextPreset-2-M: 500 40px/1 var(--fontFamily);
+  --TextPreset-2-L: 300 40px/1 var(--fontFamily);
+  --TextPreset-3: 500 20px/1.2 var(--fontFamily);
+  --TextPreset-4: 500 18px/1 var(--fontFamily);
+  --TextPreset-5-R: 400 14px/1.5 var(--fontFamily);
+
+  /* Spacing */
+  --HeroSectionGap: 2.5rem; /* 40px */
+  --QuizSectionGap: 2.5rem; /* 40px */
+  --ResultSectionGap: 2.5rem; /* 40px */
+  --AnswerBtnGap: 1rem; /* 16px */
+  --answerBtnBorderRadius: 0.75rem; /* 12px */
+  --AnswerBtnPadding: 1rem; /* 16px */
+  --QuestionCounterMB: 1rem; /* 16px */
+  --QuestionTextMB: 1.5rem; /* 24px */
+  --SubmitBtnPadding: 1rem; /* 16px */
+  --ScoreContainerPadding: 2rem; /* 32px */
+
+  --AppMaxWidth: 32rem; /* 512px */
+  --AppPadding: 1rem 1.5rem; /* 16px 24px*/
+  --AppGap: 3rem; /* 48px */
+  --ToggleContainerGap: 0.5rem; /* 8px */
+  --AppTitleMB: 1rem; /* 16px */
+  --CategoryListGap: 1rem; /* 16px */
+  --SquareSize: 2.5rem; /* 40px */
+  --SquareBorderRadius: 0.375rem; /* 6px */
+}
+
+body {
+  --BodyBackground: var(--Grey50);
+  --White-Blue850: var(--White); /* This naming is for Light/Dark mode */
+  --Blue900-White: var(--Blue900);
+  --Grey-Blue: var(--Grey500);
+  --Red-White: var(--Red500);
+  --box-shadow: 0 1rem 2.5rem rgba(171, 193, 225, 0.14);
+
+  background-color: var(--BodyBackground);
+  background-image: url("./assets/images/pattern-background-mobile-light.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  margin: 0 auto;
+  padding: var(--AppPadding);
+  min-height: 100vh;
+
+  transition: all 0.3s ease-in-out;
+}
+.container {
+  max-width: var(--AppMaxWidth);
+  margin: 0 auto;
+}
+
+.hidden > *,
+.hidden > * div {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.orange {
+  background-color: var(--Orange50);
+  color: var(--Orange400);
+}
+.green {
+  background-color: var(--Green100);
+  color: var(--Green500);
+}
+.blue {
+  background-color: var(--Blue50);
+  color: var(--Blue500);
+}
+.purple {
+  background-color: var(--Purple100);
+  color: var(--Purple600);
+}
+
+/* ---------- Quiz Header ----------- */
+/* ---------------------------------- */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  margin-bottom: var(--AppGap);
+}
+
+/* -------- Toggle Container -------- */
+/* ---------------------------------- */
+.toggleContainer {
+  display: flex;
+  place-items: center;
+  gap: var(--ToggleContainerGap);
+}
+
+/* ----- Dark Mode Toggle Switch ---- */
+/* ---------------------------------- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 2rem; /* 32px */
+  height: 1.25rem; /* 20px */
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--Purple600);
+  transition: 0.4s;
+  border-radius: 1.5rem; /* 24px */
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider:before {
+  transform: translateX(12px);
+}
+
+/* ----------- Hero Section ----------- */
+/* ------------------------------------ */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--HeroSectionGap);
+}
+.appTitle {
+  font: var(--TextPreset-2-L);
+  color: var(--Blue900);
+  margin-bottom: var(--AppTitleMB);
+}
+.appTitle span {
+  font: var(--TextPreset-2-M);
+  margin-top: 0.5rem;
+}
+.textPart p {
+  font: var(--TextPreset-5-R);
+  color: var(--Grey-Blue);
+  font-style: italic;
+}
+
+/* ---Category Part */
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--CategoryListGap);
+}
+
+.category-card,
+.selected-category {
+  display: flex;
+  align-items: center;
+  gap: var(--AnswerBtnGap);
+  border-radius: var(--answerBtnBorderRadius);
+}
+.category-card {
+  background: var(--White-Blue850);
+  padding: var(--AnswerBtnPadding);
+
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+
+  transition: transform 0.2s;
+}
+
+.category-card:hover {
+  transform: scale(1.01);
+}
+
+.category-card img,
+.selected-category img {
+  width: var(--SquareSize);
+  height: var(--SquareSize);
+
+  padding: 0.356rem;
+  border-radius: var(--SquareBorderRadius);
+}
+.category-card h3,
+.selected-category h3 {
+  font: var(--TextPreset-4);
+  color: var(--Blue900-White);
+}
+.selected-category h3,
+.selected-category img {
+  flex: 1;
+}
+
+/* ----------- Quiz Section ----------- */
+/* ------------------------------------ */
+.quiz-section,
+.question-header {
+  display: flex;
+  flex-direction: column;
+}
+.quiz-section {
+  gap: var(--QuizSectionGap);
+}
+
+#questionCounter {
+  font: var(--TextPreset-5-R);
+  font-style: italic;
+  color: var(--Grey-Blue);
+  margin-bottom: var(--QuestionCounterMB);
+}
+#questionText {
+  margin-bottom: var(--QuestionTextMB);
+  font: var(--TextPreset-3);
+  color: var(--Blue900-White);
+}
+
+.progress-container {
+  background-color: var(--White-Blue850);
+  height: 1rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background-color: var(--Purple600);
+  height: 100%;
+  width: 0%;
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+.quiz-card {
+  animation: slide-in 0.4s ease;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--CategoryListGap);
+  margin-bottom: 1rem;
+}
+
+.answer-btn {
+  display: flex;
+  align-items: center;
+  text-align: start;
+  gap: var(--AnswerBtnGap);
+
+  background-color: var(--White-Blue850);
+  color: var(--Blue900-White);
+  font: var(--TextPreset-4);
+  border: none;
+  border-radius: var(--answerBtnBorderRadius);
+  padding: var(--AnswerBtnPadding);
+  cursor: pointer;
+  animation: fadeIn 0.5s ease;
+}
+
+.answer-btn:is(:hover, :focus) {
+  outline: 3px solid var(--Purple600);
+  outline-offset: -3px;
+}
+
+.answer-btn:is(:hover, :focus) .answer-letter {
+  background-color: var(--Purple600);
+  border: 1px solid var(--Purple600);
+  color: white;
+}
+.answer-letter {
+  background-color: var(--Grey50);
+  color: var(--Grey500);
+  width: var(--SquareSize);
+  height: var(--SquareSize);
+  border-radius: var(--SquareBorderRadius);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.answer-btn.correct {
+  outline: 3px solid var(--Green500);
+  outline-offset: -3px;
+}
+.answer-btn.correct .answer-letter {
+  background-color: var(--Green500);
+  color: var(--White);
+}
+
+.answer-btn.wrong {
+  outline: 3px solid var(--Red500);
+  outline-offset: -3px;
+}
+.answer-btn.wrong .answer-letter {
+  background-color: var(--Red500);
+  color: var(--White);
+}
+
+.answer-icon {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade {
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.submit-btn {
+  background-color: var(--Purple600);
+  color: var(--White);
+  font: var(--TextPreset-4);
+  border: none;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--answerBtnBorderRadius);
+  padding: var(--SubmitBtnPadding);
+  width: 100%;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+.submit-btn:hover {
+  opacity: 0.8;
+}
+.submit-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+#errorMsg {
+  font: var(--TextPreset-4);
+  color: var(--Red-White);
+
+  margin-top: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+/* ---------- Result Section ---------- */
+/* ------------------------------------ */
+.result-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ResultSectionGap);
+}
+.result-section h2 {
+  font: var(--TextPreset-2-L);
+  color: var(--Blue900-White);
+
+  span {
+    display: block;
+    font: var(--TextPreset-2-M);
+    margin-top: 1rem;
+  }
+}
+
+.score-container {
+  background-color: var(--White-Blue850);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  padding: var(--ScoreContainerPadding); /* 32px */
+  border-radius: var(--answerBtnBorderRadius);
+  box-shadow: var(--box-shadow);
+  margin-bottom: 1rem;
+}
+#scoreResult {
+  font: var(--TextPreset-1);
+  color: var(--Blue900-White);
+}
+#scoreTotal {
+  font: var(--TextPreset-4);
+  color: var(--Grey-Blue);
+}
+
+/* ************************************ */
+/*           Dark Mode Styles           */
+/* ************************************ */
+body.dark-mode {
+  --BodyBackground: var(--Blue900);
+  --White-Blue850: var(--Blue850);
+  --Blue900-White: var(--White);
+  --Grey-Blue: var(--Blue300);
+  --Red-White: var(--White);
+  --box-shadow: 0 1rem 2.5rem rgba(49, 62, 81, 0.144);
+
+  background-image: url("./assets/images/pattern-background-mobile-dark.svg");
+}
+body.dark-mode .toggleContainer > img {
+  filter: brightness(0) saturate(100%) invert(99%) sepia(30%) saturate(0%)
+    hue-rotate(344deg) brightness(107%) contrast(100%);
+}
+body.dark-mode .appTitle {
+  color: var(--White);
+}
+
+/* ************************************ */
+/*             Tablet Styles            */
+/* ************************************ */
+@media (min-width: 768px) {
+  :root {
+    /* Typography */
+    --TextPreset-1: 500 144px/1 var(--fontFamily);
+    --TextPreset-2-L: 300 64px/1 var(--fontFamily);
+    --TextPreset-2-M: 500 64px/1 var(--fontFamily);
+    --TextPreset-3: 500 36px/1.2 var(--fontFamily);
+    --TextPreset-4: 500 28px/1 var(--fontFamily);
+    --TextPreset-6: 400 20px/1.5 var(--fontFamily);
+    --TextPreset-5-R: var(--TextPreset-6);
+
+    /* Spacing */
+    --HeroSectionGap: 4rem; /* 64px */
+    --QuizSectionGap: 4rem; /* 64px */
+    --ResultSectionGap: 4rem; /* 64px */
+    --QuestionTextMB: 2.5rem; /* 40px */
+    --AnswerBtnGap: 2rem; /* 32px */
+    --answerBtnBorderRadius: 1.5rem;
+    --SubmitBtnPadding: 2rem; /* 32px */
+    --QuestionCounterMB: 1.5rem; /* 24px */
+    --ScoreContainerPadding: 3rem; /* 48px */
+
+    --AppMaxWidth: 56rem; /* 896px */
+    --AppPadding: 3.375rem 4rem; /* 54px 64px*/
+    --ToggleContainerGap: 1rem; /* 16px */
+    --CategoryListGap: 1.5rem; /* 24px */
+
+    --SquareSize: 3.5rem; /* 56px */
+    --SquareBorderRadius: 0.75rem; /* 12px */
+  }
+  body {
+    background-image: url("./assets/images/pattern-background-tablet-light.svg");
+  }
+  body.dark-mode {
+    background-image: url("./assets/images/pattern-background-tablet-dark.svg");
+  }
+
+  /* Quiz Header */
+  /* Dark Mode Toggle Switch ---- */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 3rem; /* 48px */
+    height: 1.75rem; /* 28px */
+  }
+  .slider:before {
+    height: 1.25rem; /* 20px */
+    width: 1.25rem; /* 20px */
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(20px);
+  }
+  #errorMsg {
+    font: var(--TextPreset-5-R);
+  }
+  #errorMsg,
+  .answers,
+  .score-container {
+    margin-bottom: 2rem;
+  }
+  .result-section .selected-category {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ************************************ */
+/*             Desktop Styles           */
+/* ************************************ */
+@media (min-width: 1200px) {
+  :root {
+    /* Spacing */
+    --HeroSectionGap: 8rem; /* 128px desktop*/
+    --QuizSectionGap: 8rem; /* 128px desktop*/
+    --ResultSectionGap: 9rem; /* 144px desktop*/
+    --QuestionTextMB: 11.5rem; /* 184px desktop*/
+
+    --AppMaxWidth: 72.5rem; /* 1160px */
+    --AppPadding: 5.187rem 4rem; /* 83px 64px*/
+    --AppGap: 6rem; /* 96px */
+    --AppTitleMB: 3rem; /* 48px */
+    --CategoryListGap: 1rem; /* 16px */
+    --AnswerBtnPadding: 1.5rem; /* 24px */
+    --SquareBorderRadius: 0.5rem; /* 8px */
+  }
+  body {
+    background-image: url("./assets/images/pattern-background-desktop-light.svg");
+  }
+  body.dark-mode {
+    background-image: url("./assets/images/pattern-background-desktop-dark.svg");
+  }
+
+  /* Quiz Header */
+  .quiz-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-section,
+  .quiz-section,
+  .result-section {
+    flex-direction: row;
+  }
+
+  .textPart,
+  .category-part,
+  .question-header,
+  .quiz-card,
+  .result-section > div {
+    flex: 1;
+  }
+}

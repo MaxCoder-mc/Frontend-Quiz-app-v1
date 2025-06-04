@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Frontend Mentor | Frontend quiz app</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="quiz-header">
+        <div class="selected-catagory"></div>
+        <div class="toggleContainer">
+          <img src="./assets/images/icon-sun-dark.svg" alt="sun" />
+          <label class="switch">
+            <input type="checkbox" id="dark-toggle" />
+            <span class="slider round"></span>
+          </label>
+          <img src="./assets/images/icon-moon-dark.svg" alt="moon" />
+        </div>
+      </header>
+
+      <main id="app">
+        <!-- Quiz menu start -->
+        <section id="heroSection" class="hero-section">
+          <div class="textPart">
+            <h1 class="appTitle">
+              Welcome to the <br /><span>Frontend Quiz!</span>
+            </h1>
+            <p>Pick a subject to get started.</p>
+          </div>
+
+          <div id="categoryPart" class="category-part">
+            <div class="category-list"></div>
+          </div>
+        </section>
+        <!-- Quiz menu end -->
+
+        <!-- Quiz Section start-->
+        <section id="quizSection" class="quiz-section hidden">
+          <div class="question-header">
+            <span id="questionCounter"></span>
+            <h3 id="questionText"></h3>
+            <div id="progressContainer" class="progress-container">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
+          </div>
+          <div id="quizCard" class="quiz-card">
+            <div id="answerContainer" class="answers"></div>
+            <button id="submitBtn" class="submit-btn">Submit Answer</button>
+            <div id="errorMsg" class="hidden">
+              <img src="./assets/images/icon-error.svg" alt="error" />
+              <p>Please select an answer</p>
+            </div>
+          </div>
+        </section>
+        <!-- Quiz Section end-->
+
+        <!-- Result Section start-->
+        <section id="resultSection" class="result-section hidden">
+          <h2 class="score-title">Quiz Completed <span>You scored...</span></h2>
+          <div>
+            <div class="score-container">
+              <div class="selected-category"></div>
+              <span id="scoreResult"></span>
+              <span id="scoreTotal"></span>
+            </div>
+            <button onclick="location.reload()" class="submit-btn">
+              Play Again
+            </button>
+          </div>
+        </section>
+        <!-- Result Section end-->
+      </main>
+    </div>
+  </body>
+</html>

@@ -49,7 +49,7 @@ function showCategories() {
   quizzes.forEach((quiz, index) => {
     const card = document.createElement("div");
     card.className = "category-card";
-    card.innerHTML = `<img src="${quiz.icon}" alt="${quiz.title}" class="${classColors[index]}"><h3>${quiz.title}</h3>`;
+    card.innerHTML = `<img src="${quiz.icon}" alt="${quiz.title}" class="${classColors[index]}"><h2 class="preset-4">${quiz.title}</h2>`;
     card.onclick = () => startQuiz(quiz, index);
     list.appendChild(card);
   });
@@ -66,7 +66,7 @@ function startQuiz(quiz, index) {
   score = 0;
   heroSection.classList.add("hidden");
   quizSection.classList.remove("hidden");
-  selectedCategory.innerHTML = `<img src="${quiz.icon}" alt="${quiz.title}" class="${classColors[index]}"><h3>${quiz.title}</h3>`;
+  selectedCategory.innerHTML = `<img src="${quiz.icon}" alt="${quiz.title}" class="${classColors[index]}"><h3 class="preset-4">${quiz.title}</h3>`;
   selected_category = selectedCategory.innerHTML;
   loadQuestion();
 }
@@ -113,7 +113,7 @@ function loadQuestion() {
 
     answerBtn.className = "answer-btn";
     answerBtn.innerHTML = `<span class="answer-letter">${answersLetters[index]}</span>
-                           <span class="answer-text"></span>
+                           <span class="answer-text preset-4"></span>
                            <img class="answer-icon" src="" alt=""></img>`;
 
     answerBtn.querySelector(".answer-text").textContent = opt;

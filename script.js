@@ -48,6 +48,9 @@ fetch("./data.json")
 function showCategories() {
   quizzes.forEach((quiz, index) => {
     const card = document.createElement("div");
+    card.setAttribute("role", "button"); // For accessibility
+    card.setAttribute("tabindex", "0"); // For accessibility
+    
     card.className = "category-card";
     card.innerHTML = `<img src="${quiz.icon}" alt="${quiz.title}" class="${classColors[index]}"><h2 class="preset-4">${quiz.title}</h2>`;
     card.onclick = () => startQuiz(quiz, index);

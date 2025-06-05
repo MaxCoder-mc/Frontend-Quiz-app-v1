@@ -123,7 +123,6 @@ body {
   margin: 0 auto;
   padding: var(--AppPadding);
   min-height: 100dvh;
-  
 
   transition: all 0.3s ease-in-out;
 }
@@ -132,14 +131,8 @@ body {
   margin: 0 auto;
 }
 
-.hidden > *,
-.hidden > * div {
-  display: none;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  width: 0;
-  height: 0;
+.hidden {
+  display: none !important;
 }
 
 .orange {
@@ -173,11 +166,11 @@ body {
 
   font: var(--TextPreset-2-L);
   color: var(--Blue900-White);
-
-  span {
-    font: var(--TextPreset-2-M);
-  }
 }
+.preset-2 span {
+  font: var(--TextPreset-2-M);
+}
+
 .preset-4 {
   font: var(--TextPreset-4);
   color: var(--Blue900-White);
@@ -359,9 +352,8 @@ input:checked + .slider:before {
   animation: fadeIn 0.5s ease;
 }
 
-.answer-btn:is(:hover, :focus) {
+.answer-btn:is(:hover, :focus, :focus-visible) {
   outline: 3px solid var(--Purple600);
-  outline-offset: -3px;
 }
 
 .answer-btn:is(:hover, :focus) .answer-letter {
@@ -385,7 +377,6 @@ input:checked + .slider:before {
 
 .answer-btn.correct {
   outline: 3px solid var(--Green500);
-  outline-offset: -3px;
 }
 .answer-btn.correct .answer-letter {
   background-color: var(--Green500);
@@ -394,11 +385,17 @@ input:checked + .slider:before {
 
 .answer-btn.wrong {
   outline: 3px solid var(--Red500);
-  outline-offset: -3px;
 }
 .answer-btn.wrong .answer-letter {
   background-color: var(--Red500);
   color: var(--White);
+}
+
+.answer-btn {
+  &.correct,
+  &.wrong {
+    outline-offset: -3px;
+  }
 }
 
 .answer-icon {
@@ -511,6 +508,14 @@ body.dark-mode .toggleContainer > img {
 }
 body.dark-mode .appTitle {
   color: var(--White);
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* ************************************ */

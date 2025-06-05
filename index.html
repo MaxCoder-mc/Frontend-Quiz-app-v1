@@ -25,11 +25,11 @@
   <body>
     <div class="container">
       <header class="quiz-header">
-        <div class="selected-category"></div>
+        <div class="selected-category preset-4"></div>
         <div class="toggleContainer">
           <img src="./assets/images/icon-sun-dark.svg" alt="sun" />
           <label class="switch">
-            <input type="checkbox" id="dark-toggle" />
+            <input type="checkbox" id="dark-toggle" checked />
             <span class="slider round"></span>
           </label>
           <img src="./assets/images/icon-moon-dark.svg" alt="moon" />
@@ -40,10 +40,10 @@
         <!-- Quiz menu start -->
         <section id="heroSection" class="hero-section">
           <div class="textPart">
-            <h1 class="appTitle">
-              Welcome to the <br /><span>Frontend Quiz!</span>
+            <h1 class="appTitle preset-2">
+              Welcome to the <span>Frontend Quiz!</span>
             </h1>
-            <p>Pick a subject to get started.</p>
+            <p class="text-italic">Pick a subject to get started.</p>
           </div>
 
           <div id="categoryPart" class="category-part">
@@ -55,15 +55,17 @@
         <!-- Quiz Section start-->
         <section id="quizSection" class="quiz-section hidden">
           <div class="question-header">
-            <span id="questionCounter"></span>
-            <h3 id="questionText"></h3>
+            <span id="questionCounter" class="text-italic"></span>
+            <h2 id="questionText"></h2>
             <div id="progressContainer" class="progress-container">
               <div id="progressBar" class="progress-bar"></div>
             </div>
           </div>
           <div id="quizCard" class="quiz-card">
             <div id="answerContainer" class="answers"></div>
-            <button id="submitBtn" class="submit-btn">Submit Answer</button>
+            <button id="submitBtn" class="submit-btn" type="button">
+              Submit Answer
+            </button>
             <div id="errorMsg" class="hidden">
               <img src="./assets/images/icon-error.svg" alt="error" />
               <p>Please select an answer</p>
@@ -74,10 +76,10 @@
 
         <!-- Result Section start-->
         <section id="resultSection" class="result-section hidden">
-          <h2 class="score-title">Quiz Completed <span>You scored...</span></h2>
+          <h2 class="preset-2">Quiz Completed <span>You scored...</span></h2>
           <div>
             <div class="score-container">
-              <div class="selected-category"></div>
+              <div class="selected-category preset-4"></div>
               <span id="scoreResult"></span>
               <span id="scoreTotal"></span>
             </div>
